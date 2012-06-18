@@ -1,3 +1,4 @@
+require 'rspec'
 #Pokerbot
 
 #in texas hold-em, each player is dealt two cards (from a deck of 52) which are hidden from everyone
@@ -8,18 +9,6 @@
 #describes the five community cards-- and determine your odds of winning the hand against another 
 #single player (ie. another player with two of the remaining 45 cards selected at random).
 
-@default_hand =  [{"name"=>7, "suit"=>"Spade", "value"=>6, "string"=>"5 of Clubs"},
-         {"name"=>"King", "suit"=>"Diamond", "value"=>14, "string"=>"King of Hearts"}]
-		
-@default_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"5 of Spades"},
-		     {"name"=>"Queen", "suit"=>"Diamond", "value"=>12, "string"=>"King of Spades"},
-		     {"name"=>"Jack", "suit"=>"Diamond", "value"=>11, "string"=>"Jack of Diamonds"},
-	       {"name"=>5, "suit"=>"Spade", "value"=>5, "string"=>"5 of Hearts"},
-		     {"name"=>10, "suit"=>"Diamond", "value"=>10, "string"=>"King of Diamonds"}]
-		     
-@my_cards = @default_hand + @default_board
-
-		     
 def best_hand(hand,board)
   
   cards = hand + board
@@ -45,8 +34,8 @@ def best_hand(hand,board)
      :second => fullhouse[-1]}
   elsif !@flush_values.empty?
     {:hand => :flush, 
-     :high => @flush_values[-1], 
-     :values => @flush_values}
+     :values => @flush_values,
+     :suit => @flush_suit}
   elsif !@straight.empty?
     {:hand => :straight, 
      :high =>@straight[-1]}
@@ -100,20 +89,20 @@ def hands(cards)
         @flush_values << h["value"]
       end
     end
-    @flush_values.sort!
+    @flush_values = @flush_values.sort.reverse
   end
   
   
   #straight -- WORKING
   @straight = []
-  @values.sort.each_index do |i|
-    if @values.sort[i+1].to_i - @values.sort[i].to_i == 1
-      @straight << @values.sort[i]
+  i = 0
+  3.times do |i|
+    if @values.sort[i,5] == (@values.sort[i]..(@values.sort[i]+4)).to_a
+      @straight = []
+      @straight = @values.sort[i,5]
+      i += 1
     end
   end
-  @straight << @straight[-1] + 1
-  @straight = @straight.size > 4 ? @straight : []  
-  
   
   #four of a kind -- WORKING
   @quads = []
@@ -185,3 +174,98 @@ def counts_of_suits(cards)
   end
   @counts_of_suits
 end
+
+
+describe "best_hand" do
+  it "should return straight flushes" do
+    sample_hand =  [{"name"=>9, "suit"=>"Clubs", "value"=>9, "string"=>"9 of Clubs"},
+                    {"name"=>"King", "suit"=>"Clubs", "value"=>13, "string"=>"King of Clubs"}]
+    sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+    		            {"name"=>"Queen", "suit"=>"Clubs", "value"=>12, "string"=>"Queen of Clubs"},
+        		        {"name"=>"Jack", "suit"=>"Clubs", "value"=>11, "string"=>"Jack of Clubs"},
+        	          {"name"=>5, "suit"=>"Heart", "value"=>5, "string"=>"5 of Hearts"},
+        		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+    best_hand(sample_hand,sample_board).should eq({:hand => :straight_flush, :high => 13, :suit => "Clubs"})
+  end
+  it "should return four of a kind" do
+    sample_hand =  [{"name"=>"King", "suit"=>"Spades", "value"=>13, "string"=>"King of Spades"},
+                    {"name"=>"King", "suit"=>"Clubs", "value"=>13, "string"=>"King of Clubs"}]
+    sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+    		            {"name"=>"Queen", "suit"=>"Clubs", "value"=>12, "string"=>"Queen of Clubs"},
+        		        {"name"=>"Jack", "suit"=>"Clubs", "value"=>11, "string"=>"Jack of Clubs"},
+        	          {"name"=>"King", "suit"=>"Heart", "value"=>13, "string"=>"King of Hearts"},
+        		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+    best_hand(sample_hand,sample_board).should eq({:hand => :four_of_a_kind, :high => 13, :kickers => [12]})
+  end
+  it "should return full houses" do
+    sample_hand =  [{"name"=>"King", "suit"=>"Spades", "value"=>13, "string"=>"King of Spades"},
+                    {"name"=>"King", "suit"=>"Clubs", "value"=>13, "string"=>"King of Clubs"}]
+    sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+    		            {"name"=>10, "suit"=>"Spades", "value"=>10, "string"=>"10 of Spades"},
+        		        {"name"=>"Jack", "suit"=>"Clubs", "value"=>11, "string"=>"Jack of Clubs"},
+        	          {"name"=>10, "suit"=>"Heart", "value"=>10, "string"=>"10 of Hearts"},
+        		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+    best_hand(sample_hand,sample_board).should eq({:hand => :full_house, :high => 13, :second => 10})
+  end
+  it "should return flushes" do
+    sample_hand =  [{"name"=>7, "suit"=>"Clubs", "value"=>7, "string"=>"7 of Clubs"},
+                    {"name"=>"King", "suit"=>"Clubs", "value"=>13, "string"=>"King of Clubs"}]
+    sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+    		            {"name"=>"Queen", "suit"=>"Clubs", "value"=>12, "string"=>"Queen of Clubs"},
+        		        {"name"=>4, "suit"=>"Clubs", "value"=>4, "string"=>"4 of Clubs"},
+        	          {"name"=>5, "suit"=>"Heart", "value"=>5, "string"=>"5 of Hearts"},
+        		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+    best_hand(sample_hand,sample_board).should eq({:hand => :flush, :values => [13,12,10,7,4], :suit => "Clubs"})
+  end
+  it "should return straights" do
+    sample_hand =  [{"name"=>9, "suit"=>"Diamonds", "value"=>9, "string"=>"9 of Diamonds"},
+                    {"name"=>"King", "suit"=>"Clubs", "value"=>13, "string"=>"King of Clubs"}]
+    sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+     		            {"name"=>"Queen", "suit"=>"Heart", "value"=>12, "string"=>"Queen of Hearts"},
+         		        {"name"=>"Jack", "suit"=>"Clubs", "value"=>11, "string"=>"Jack of Clubs"},
+         	          {"name"=>5, "suit"=>"Heart", "value"=>5, "string"=>"5 of Hearts"},
+         		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+     best_hand(sample_hand,sample_board).should eq({:hand => :straight, :high => 13})
+   end
+   it "should return trips" do
+    sample_hand =  [{"name"=>"King", "suit"=>"Spades", "value"=>13, "string"=>"King of Diamonds"},
+                    {"name"=>"King", "suit"=>"Clubs", "value"=>13, "string"=>"King of Clubs"}]
+    sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+      		          {"name"=>"Queen", "suit"=>"Heart", "value"=>12, "string"=>"Queen of Hearts"},
+    		            {"name"=>"Jack", "suit"=>"Clubs", "value"=>11, "string"=>"Jack of Clubs"},
+        	          {"name"=>5, "suit"=>"Heart", "value"=>5, "string"=>"5 of Hearts"},
+        		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+      best_hand(sample_hand,sample_board).should eq({:hand => :three_of_a_kind, :high => 13, :kickers => [12,11]})
+    end  
+    it "should return two pair" do
+      sample_hand =  [{"name"=>2, "suit"=>"Spades", "value"=>2, "string"=>"2 of Diamonds"},
+                      {"name"=>"Queen", "suit"=>"Clubs", "value"=>12, "string"=>"Queen of Clubs"}]
+      sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+        		          {"name"=>"Queen", "suit"=>"Heart", "value"=>12, "string"=>"Queen of Hearts"},
+      		            {"name"=>"Jack", "suit"=>"Clubs", "value"=>11, "string"=>"Jack of Clubs"},
+          	          {"name"=>2, "suit"=>"Heart", "value"=>2, "string"=>"2 of Hearts"},
+          		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+        best_hand(sample_hand,sample_board).should eq({:hand => :two_pair, :high => 12, :second => 2, :kickers => [13]})
+      end
+    it "should return pairs" do
+      sample_hand =  [{"name"=>3, "suit"=>"Spades", "value"=>3, "string"=>"3 of Diamonds"},
+                      {"name"=>"Queen", "suit"=>"Clubs", "value"=>12, "string"=>"Queen of Clubs"}]
+      sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+        		          {"name"=>"Queen", "suit"=>"Heart", "value"=>12, "string"=>"Queen of Hearts"},
+      		            {"name"=>"Jack", "suit"=>"Clubs", "value"=>11, "string"=>"Jack of Clubs"},
+          	          {"name"=>2, "suit"=>"Heart", "value"=>2, "string"=>"2 of Hearts"},
+          		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+        best_hand(sample_hand,sample_board).should eq({:hand => :pair, :high => 12, :kickers => [13,11,10]})
+    end        
+    it "should return a high card" do
+      sample_hand =  [{"name"=>3, "suit"=>"Spades", "value"=>3, "string"=>"3 of Diamonds"},
+                      {"name"=>"Queen", "suit"=>"Clubs", "value"=>12, "string"=>"Queen of Clubs"}]
+      sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
+        		          {"name"=>7, "suit"=>"Heart", "value"=>7, "string"=>"7 of Hearts"},
+      		            {"name"=>"Jack", "suit"=>"Clubs", "value"=>11, "string"=>"Jack of Clubs"},
+          	          {"name"=>2, "suit"=>"Heart", "value"=>2, "string"=>"2 of Hearts"},
+          		        {"name"=>10, "suit"=>"Clubs", "value"=>10, "string"=>"10 of Clubs"}]
+        best_hand(sample_hand,sample_board).should eq({:hand => :high_card, :kickers => [13,12,11,10,7]})
+    end
+end
+    
