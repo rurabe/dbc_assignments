@@ -1,0 +1,33 @@
+Objects encapsulate state and behavior
+
+	behavior = method, state = variables
+
+	class is a blueprint for creating new objects -- an abstract concept
+		instance variables for instances of the class
+		instance methods for single instances of the class
+	
+		class methods for methods that apply to the concept of the class
+		class variables are for all instances of the class (all students)
+	
+	Object oriented has details and information inherent in the object.
+
+	
+
+factory methods: ways to create new categories of instances with predefined variables
+
+	self.from_inches(inches)
+		self.new(:inches => inches)
+	end
+	
+	self.from_cm(cm)
+		self.new(:cm => cm)
+	end
+	
+	
+tell don't ask	
+
+	cookie jar, stores cookies in an array
+	yummify within jar class asks cookie how many chips it has, then adds chips
+	better to call yummify in the cookie class, which is a method that yummifies itself
+	dont peek inside the state of objects
+	tell them what to do and allow objects to take care of themselves
