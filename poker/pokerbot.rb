@@ -252,8 +252,20 @@ def possible_values(hand,*board)
     end
   end
   
+  @known_card_values = @known_hand_values + @known_board_values
   
-  @unaccounted_for_cards = @card_index.keys - @known_card_values
+  @unaccounted_for_cards = @card_index.keys - (@known_card_values)
+  
+  cards = hand.size + board.size
+  
+  @possible_combinations = @unaccounted_for_cards.combination( 7 - cards ).to_a
+  
+  @possible_combinations.each do |combo|
+    all_cards = @known_card_values + combo
+    best_hand(all_cards)
+    
+  end
+    
     
   
 end
