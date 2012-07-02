@@ -32,6 +32,8 @@ case command
   when '-t'
     list.tag_task(argument)
   when '-l'
+    list.display_tasks
+  when '-e'
     list.display_by_creation_date
   when '-f'
     list.display_by_completion_date
