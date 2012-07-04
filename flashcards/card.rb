@@ -1,13 +1,10 @@
-module Flashcards
+module FC
   class Card
-    attr_reader :term, :definition
-    def initialize(term,definition)
-      @term = term
+    attr_reader :word, :definition, :hint
+    def initialize(word,definition)
+      @word = word
       @definition = definition
-    end
-
-    def hint
-      hint = term[0]
+      @hint = @word[0]
     end
   end
 end

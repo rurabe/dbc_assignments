@@ -1,13 +1,5 @@
 require 'rspec'
-#Pokerbot
 
-#in texas hold-em, each player is dealt two cards (from a deck of 52) which are hidden from everyone
-# else. then, 5 "community" cards are dealt face up in the middle of the table. these cards can be
-# used by any player to make the strongest 5 card hand.
-
-#write a function that takes two arrays-- one that describes your two "hole" cards, and another that
-#describes the five community cards-- and determine your odds of winning the hand against another 
-#single player (ie. another player with two of the remaining 45 cards selected at random).
 @sample_hand =  [{"name"=>"King", "suit"=>"Spade", "value"=>13, "string"=>"King of Spades"},
                 {"name"=>"King", "suit"=>"Club", "value"=>13, "string"=>"King of Clubs"}]
 @sample_board = [{"name"=>"King", "suit"=>"Diamond", "value"=>13, "string"=>"King of Diamonds"},
@@ -83,12 +75,10 @@ def best_hand(hand,*board)
      :kickers => kickers.sort.reverse[0,5]}
   end
 end
-    
-
+ 
 def hands(cards)
   counts_of_values(cards)
   counts_of_suits(cards)
-
 
   #flush -- WORKING
   @flush_values = []
@@ -154,21 +144,12 @@ def hands(cards)
   end
 end
     
-
-def counts_of_values(cards)
-  @values = []
-  @counts_of_values = {}
-   
-  (0..cards.size-1).each do |c|
-    @values << cards[c]["value"]
-  end
-
-  @values.uniq.each do |value|
-    @counts_of_values[value] = @values.count(value)
-  end
+def collect_values(cards)
+  @values = cards.each { |c| c["value"] }
+  @counts_of_values = {}  
+  @values.uniq.each { |value| @counts_of_values[value] = @values.count(value) }
   @counts_of_values
 end
-
 
 def counts_of_suits(cards)
   @suits = []
@@ -183,8 +164,7 @@ def counts_of_suits(cards)
   end
   @counts_of_suits
 end
- 
-    
+     
 def possible_values(hand,*board)
   
   @card_index = {1	=>	{"name"=>2, "suit"=>"Club", "value"=>2, "string"=>"2 of Clubs"},
@@ -263,7 +243,6 @@ def possible_values(hand,*board)
   @possible_combinations.each do |combo|
     all_cards = @known_card_values + combo
     best_hand(all_cards)
-    
   end
     
     
