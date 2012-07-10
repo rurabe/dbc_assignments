@@ -1,9 +1,8 @@
-var obj = {}
-var stackMaker = function() {
+var stack = function() {
 	var stack = {
 		data: [],
 		size: function(){
-			return stack.data.length;
+			return this.data.length;
 		},
 	
 		add: function(arg){
@@ -14,8 +13,3 @@ var stackMaker = function() {
 	return stack;
 	
 };
-
-
-var stack = stackMaker();
-
-stack.size();
