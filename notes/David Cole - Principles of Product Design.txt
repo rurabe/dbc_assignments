@@ -1,0 +1,63 @@
+Designer for 6 years, lots of YC
+Disqus, Quora
+Lot of this material is based on being the first designer at YC companies, best practices for how to think ab design at a product oriented company.
+
+Principles of Design - tension that is fundamental in digital design is the basis of this talk.
+
+WWW History - Vision was document sharing, early web businesses met this model, BBS. Then web businesses started pulling away from print, but Amazon still catalog, ebay classifieds. As industry develops, pull further away from print. Gmail and Maps started with Ajax, a new way to think about software. Web 2.0, graphic designers are also inventors, bringing an autonomy and power to designers not experienced before. Agenda is much broader than for predecessors. So where do we look for inspiration if not graphic designers past? Inventors: scientists, engineers and investors.
+
+Product - piece of a larger ecosystem of the business. Businesses are drivers of outcomes. Netflix is the best example, cannibalizing their old business because their core business is connecting people to movies, not shipping dvds.
+
+Outcomes are central to this class. Outcomes are why we are here. Given these, what are we going to build. Given what, how do we build it.
+
+WHY > WHAT > HOW
+business > product > execution
+business > product > interaction > visual design > front end > back end
+
+Many companies are blending the product, interaction, visual design and frontend roles.
+
+As this role matures, it covers more of the stack and makes it faster while providing greater results. Autonomy is one of the greatest features, managing the autonomy is going to be the greatest challenges.
+
+Dividing the stack has costs, and so does integrating it. His opinion is that integration leads to better products but it depends in part on the type of organization. Argument for integration is the removal of layers between design and customers. You can push to production in 20 minutes.
+
+Scientist - testing and measurement
+Engineer - How do you build an efficient way
+Investor - removed from the execution and focused on real value
+
+Scientist - How to measure
+
+--1. Frame design work as hypothesis. You want the solutions to fall naturally out of the assumptions and facts. Stick to the implications of that logic. ie Netflix ignores DVDs for streaming only plans. What you should argue about is assumptions and facts, because execution should fall out of those. Want to have a strong vision so that if it works or not you get the feedback loop. Ask yourself what the outcome signals are going to look like.
+
+--2. Never compromise. Commit to the solution that falls out of beliefs. Adding a setting, or make that decision later is a red flag for this. Either forgotten the goals, or don't have enough data. AKA hedging. Hedgey designs are BAD.
+
+--3. Embrace being wrong. Get excited about it. Late 90's scientists were trying to find the size of the universe. Was actually speeding up, there was a lot of doubt about the quality of the data, not the implication. Discoveries have poured out of this discovery. Be able to reach into other depts, whole organization should be oriented such to support being wrong. Also difficult, because a redesign should be able to bubble up and change other parts of the company. You will be surprised at how often you are wrong at being wrong, so code things up and see what they look like even if you think its stupid.
+
+Engineer - How to build
+
+--4. Design for reuse. Don't repeat yourself. As designers we would do well to follow this principle as well. Example, twitter bootstrap. Investing in the How up front, and exclusively dealing with the Why and the What. High level change can happen really fast when the how is standardized. Mental model is starting with stock parts, then customizing when you need to. Speed of iteration vs depth of execution. Depth of execution is a good competitive advantage when the product is a commodity or when operating at scale (even incremental changes have a big impact.)
+
+--5. Build progressively. Build piecemeal, verify, and build to a larger whole. Design is similar. Build products at a micro level before trying to design the system. Aim for small product successes that you can roll into larger product successes.
+iPod > itunes > iphone > ipad
+incremental evolution.
+
+--6. Prefer good engineering over good design. Depth of execution is a choice, not the default. Can validate good products that look bad. If it's useful don't hesitate to make it beautiful. Usefulness is a prerequisite for beauty, and is necessary. Competing on outcomes (best thing), not prettiest thing.
+
+Investor - Boil startup down to a single phrase
+
+--7. Identify a central metaphor for your product or feature. Find a central metaphor that's so good, the product designs itself. Color on iPhone tried to do new visual design, interaction and product at the same time. Innovate on one at a time. Airbnb's design is pretty close to hotel booking site, though they were changing the product. Only change the things that are central to the product.
+
+--8. focus on problems, not solutions. A lot of first time entrepreneurs focus on their solution, should be pitching according to the problem. Easier to agree on problems than on solution. Few products succeed on first iteration. PD keeps global product in their head, designer does a deep dive on one. Not mutually exclusive, but should be defined.
+
+--9. Measure your work in years. Thiel says that a business won't create most of it's value until years 10-15. Digg vs Reddit, which swapped over 6 years. First 5 years is about finding what you really have. Amazon writes 7 year plans, and range of competitors broadens. Think of your work as super temporary and ready to be displaced. At the higher levels, want to dig in and be patient, if you really believe in your hypothesis.
+
+
+You were a shark.
+
+
+
+
+
+
+
+
+
