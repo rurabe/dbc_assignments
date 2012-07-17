@@ -1,7 +1,7 @@
 describe("The stack", function() {
 	
 	beforeEach(function() {
-	    stack.data = []
+	    stack.data = [];
 	  });
 
   it("should be an object", function() {
@@ -43,7 +43,24 @@ describe("The stack", function() {
 	});
 	
 	it("should raise an error if you try to remove from an empty stack", function(){
-		expect(stack.remove()).toThrow(new Error("Stack is already empty!"));
+		expect(function(){stack.remove();}).toThrow(new Error("Stack is already empty!"));
 	});
 	
 });
+
+describe("The stackMaker", function() {
+	
+	beforeEach(function() {
+	    var stackLike = new stackMaker();
+	  });
+	
+	it("should make a stacklike object", function(){
+		expect(stackLike).toEqual(jasmine.any(Object));
+	});
+	
+	
+});
+
+
+
+

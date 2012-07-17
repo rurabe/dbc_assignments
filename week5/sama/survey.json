@@ -1,0 +1,148 @@
+{
+    "survey_id": 1,
+    "title": "Baseline Survey (Draft)",
+    "introduction": "Thank you for taking the time to participate in this survey of SamaHub workers. The purpose of this survey is to better understand the background and demographics of our workers in order to continue to deliver the best work opportunities through the SamaHub. \n\nThere are no ‘wrong’ answers and all information collected will be strictly private and anonymous at the individual level. The survey is comprised of a total of 55 short questions and will take approximately 25 minutes to complete. \n\nSamaHub workers will be surveyed regularly (1-2 times a year) through the SamaHub; additionally, with the permission of the respondent, a selection of SamaHub workers may also be contacted in-person or via telephone for questions.",
+    "sections": [
+		{
+        "section_id": "A",
+        "title": "Part A: Basic Information",
+        "questions": [
+				{
+            "number": 1,
+            "title": "First Name",
+            "forms": [{
+                "type": {
+                    "name": "text",
+                    "default": ""
+                }
+            }]
+        },
+
+        {
+            "number": 2,
+            "title": "Last Name",
+            "forms": [{
+                "type": {
+                    "name": "text",
+                    "default": ""
+                }
+            }]
+        },
+
+        {
+            "number": 3,
+            "title": "Year of Birth",
+            "forms": [{
+                "type": {
+                    "name": "dropdown",
+                    "answers": "(1950..2000)",
+                    "default": ""
+                }
+            }]
+        },
+
+        {
+            "number": 4,
+            "title": "What is your gender?",
+            "forms": [{
+                "type": {
+                    "name": "radio",
+                    "answers": ["Male", "Female"],
+                    "default": ""
+                }
+            }]
+        }, 
+
+				{
+            "number": 5,
+            "title": "Where were you born?",
+            "forms": [{
+                "type": {
+                    "name": "dropdown",
+                    "answers": ["City A", "City B", "City C", "City D"],
+                    "default": "",
+                    "other": "true"
+                }
+            }]
+        }, 
+				
+				{
+            "number": 6,
+            "title": "What is the name of your work center?",
+            "forms": [{
+                "type": {
+                    "name": "dropdown",
+                    "answers": ["Daproim", "Horizon Contact Centers", "Technobrain"],
+                    "default": "",
+                    "other": "true"
+                }
+            }]
+        }, 
+
+				{
+            "number": 7,
+            "title": "What is your current marital status?",
+            "forms": [{
+                "type": {
+                    "name": "dropdown,",
+                    "answers": ["Never married and do not live with a boyfriend/girlfriend", "Never married but currently living with a boyfriend/girlfriend", "Married", "Previously married (divorced or separated)", "Widowed"],
+                    "default": "",
+                    "other": "true"
+                }
+            }]
+        }, 
+
+				{
+            "number": 8,
+            "title": "Where is your current residence located?",
+            "forms": [{
+                "type": {
+                    "name": "dropdown",
+                    "answers": ["City A", "City B", "City C", "City D"],
+                    "default": "",
+                    "other": "true"
+                }
+            }]
+        }, 
+
+				{
+            "number": 9,
+            "title": "How many members are in your household? Please include members that are temporarily absent (for example for study or work), but who normally sleep and/or eat their meals in the household?",
+            "additional_info": "Household members include the following:\n- Anyone who has been living in your household for 6 months or longer\n- Anyone who has been staying in your household for less than 6 months but plans to stay in your household for 6 or more months\n- Anyone who has lived in your household for at least 6 months but has now been away for less than 6 months\n\nHousehold members do NOT include the following:\n- Anyone who has left the household permanently (examples include those who have left for marriage or who have left the city/village), even if they left less than 6 months ago",
+            "forms": [{
+                "name": "Adults",
+                "axis": "Household Members",
+                "type": {
+                    "name": "dropdown",
+                    "answers": [1,2,3,4,5,6,7,8,9,10, "11 or more"],
+                    "default": ""
+                }
+            }, 
+						{
+                "name": "Children",
+                "axis": "Household Members",
+                "type": {
+                    "name": "dropdown",
+                    "answers": [1,2,3,4,5,6,7,8,9,10, "11 or more"],
+                    "default" : ""
+                }
+            }]
+
+        }, 
+
+				{
+            "number": 10,
+            "title": "What is your current relationship to the head of the household?",
+            "forms": [{
+                "type": {
+                    "name": "dropdown",
+                    "answers": ["I am the head of the household", "I am his/her married spouse", "I am his/her child/adopted child/ step-child", "I am his/her grandchild", "ETC"],
+                    "default": "",
+                    "other": "true"
+                }
+            }]
+        }
+				]
+    }
+		]
+}
